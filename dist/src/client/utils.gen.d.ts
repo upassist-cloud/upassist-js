@@ -4,13 +4,13 @@ export declare const createQuerySerializer: <T = unknown>({ parameters, ...args 
 /**
  * Infers parseAs value from provided Content-Type header.
  */
-export declare const getParseAs: (contentType: string | null) => Exclude<Config['parseAs'], 'auto'>;
+export declare const getParseAs: (contentType: string | null) => Exclude<Config["parseAs"], "auto">;
 export declare function setAuthParams(options: Pick<RequestOptions, 'auth' | 'query' | 'security'> & {
     headers: Headers;
 }): Promise<void>;
 export declare const buildUrl: Client['buildUrl'];
 export declare const mergeConfigs: (a: Config, b: Config) => Config;
-export declare const mergeHeaders: (...headers: Array<Required<Config>['headers'] | undefined>) => Headers;
+export declare const mergeHeaders: (...headers: Array<Required<Config>["headers"] | undefined>) => Headers;
 type ErrInterceptor<Err, Res, Req, Options> = (error: Err, 
 /** response may be undefined due to a network error where no response object is produced */
 response: Res | undefined, 
