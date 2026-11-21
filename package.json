@@ -1,0 +1,37 @@
+{
+  "name": "upassist",
+  "version": "1.0.0",
+  "description": "Generated client for the Upassist public management API",
+  "type": "module",
+  "main": "./dist/src/index.cjs",
+  "module": "./dist/src/index.mjs",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.mjs",
+      "require": "./dist/src/index.cjs"
+    },
+    "./client": {
+      "types": "./dist/src/client.gen.d.ts",
+      "import": "./dist/src/client.gen.mjs",
+      "require": "./dist/src/client.gen.cjs"
+    },
+    "./ingest": {
+      "types": "./dist/ingest.d.ts",
+      "import": "./dist/ingest.mjs",
+      "require": "./dist/ingest.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --declaration --emitDeclarationOnly --outDir dist"
+  },
+  "devDependencies": {
+    "@hey-api/client-fetch": "^0.13.1",
+    "tsup": "^9.0.0",
+    "typescript": "^7.0.2"
+  }
+}
