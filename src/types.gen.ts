@@ -777,7 +777,51 @@ export type HeartbeatUpdateSchema = {
 /**
  * IncidentContentTypeEnum
  */
-export type IncidentContentTypeEnum = 'MONITOR' | 'HEARTBEAT' | 'SITE_ALERT' | 'ERROR_ISSUE' | 'CHART_ALERT';
+export type IncidentContentTypeEnum = 'MONITOR' | 'HEARTBEAT' | 'SITE_ALERT' | 'ERROR_ISSUE' | 'CHART_ALERT' | 'MANUAL';
+
+/**
+ * IncidentCreateSchema
+ */
+export type IncidentCreateSchema = {
+    /**
+     * Incident title or summary
+     */
+    name: string;
+    /**
+     * Root cause or description of the incident
+     */
+    cause: string;
+    /**
+     * Start time (UTC). Defaults to current time if omitted.
+     */
+    started_at?: string | null;
+    /**
+     * Optional severity indicator (e.g. critical, major, minor, warning)
+     */
+    severity?: string | null;
+    /**
+     * Arbitrary custom metadata dictionary
+     */
+    meta?: {
+        [key: string]: unknown;
+    } | null;
+    /**
+     * Whether to dispatch alert notifications to project integrations
+     */
+    send_alert?: boolean;
+    /**
+     * Optional associated monitor ID
+     */
+    monitor_id?: string | null;
+    /**
+     * Optional associated heartbeat ID
+     */
+    heartbeat_id?: string | null;
+    /**
+     * Optional associated site alert ID
+     */
+    site_alert_id?: string | null;
+};
 
 /**
  * IncidentDetailSchema
@@ -1771,6 +1815,8 @@ export type SourceListSchema = {
     metrics_points_24h?: number;
     metrics_active_series_24h?: number;
     metrics_bytes_total?: number;
+    health_status?: string;
+    current_eps?: number;
 };
 
 /**
@@ -2178,7 +2224,7 @@ export type WebhookIntegrationCreateSchema = {
 export type Error = {
     code: string;
     message: string;
-    request_id?: string;
+    request_id?: string | null;
 };
 
 /**
@@ -3890,49 +3936,6 @@ export type IncidentAcknowledgeResponses = {
 
 export type IncidentAcknowledgeResponse = IncidentAcknowledgeResponses[keyof IncidentAcknowledgeResponses];
 
-export type IncidentGetData = {
-    body?: never;
-    path: {
-        incident_id: string;
-    };
-    query?: never;
-    url: '/v1/incidents/{incident_id}';
-};
-
-export type IncidentGetErrors = {
-    /**
-     * Error
-     */
-    400: Error;
-    /**
-     * Error
-     */
-    401: Error;
-    /**
-     * Error
-     */
-    403: Error;
-    /**
-     * Error
-     */
-    404: Error;
-    /**
-     * Error
-     */
-    422: Error;
-};
-
-export type IncidentGetError = IncidentGetErrors[keyof IncidentGetErrors];
-
-export type IncidentGetResponses = {
-    /**
-     * Request fulfilled, document follows
-     */
-    200: IncidentDetailSchema;
-};
-
-export type IncidentGetResponse = IncidentGetResponses[keyof IncidentGetResponses];
-
 export type IncidentListData = {
     body?: never;
     path?: never;
@@ -3990,6 +3993,90 @@ export type IncidentListResponses = {
 };
 
 export type IncidentListResponse = IncidentListResponses[keyof IncidentListResponses];
+
+export type IncidentCreateData = {
+    body: IncidentCreateSchema;
+    path?: never;
+    query?: never;
+    url: '/v1/incidents';
+};
+
+export type IncidentCreateErrors = {
+    /**
+     * Error
+     */
+    400: Error;
+    /**
+     * Error
+     */
+    401: Error;
+    /**
+     * Error
+     */
+    403: Error;
+    /**
+     * Error
+     */
+    404: Error;
+    /**
+     * Error
+     */
+    422: Error;
+};
+
+export type IncidentCreateError = IncidentCreateErrors[keyof IncidentCreateErrors];
+
+export type IncidentCreateResponses = {
+    /**
+     * Document created, URL follows
+     */
+    201: IncidentDetailSchema;
+};
+
+export type IncidentCreateResponse = IncidentCreateResponses[keyof IncidentCreateResponses];
+
+export type IncidentGetData = {
+    body?: never;
+    path: {
+        incident_id: string;
+    };
+    query?: never;
+    url: '/v1/incidents/{incident_id}';
+};
+
+export type IncidentGetErrors = {
+    /**
+     * Error
+     */
+    400: Error;
+    /**
+     * Error
+     */
+    401: Error;
+    /**
+     * Error
+     */
+    403: Error;
+    /**
+     * Error
+     */
+    404: Error;
+    /**
+     * Error
+     */
+    422: Error;
+};
+
+export type IncidentGetError = IncidentGetErrors[keyof IncidentGetErrors];
+
+export type IncidentGetResponses = {
+    /**
+     * Request fulfilled, document follows
+     */
+    200: IncidentDetailSchema;
+};
+
+export type IncidentGetResponse = IncidentGetResponses[keyof IncidentGetResponses];
 
 export type IncidentResolveData = {
     body?: never;

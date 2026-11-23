@@ -59,6 +59,7 @@ __export(src_exports, {
   heartbeatUnpause: () => heartbeatUnpause,
   heartbeatUpdate: () => heartbeatUpdate,
   incidentAcknowledge: () => incidentAcknowledge,
+  incidentCreate: () => incidentCreate,
   incidentGet: () => incidentGet,
   incidentList: () => incidentList,
   incidentResolve: () => incidentResolve,
@@ -1168,15 +1169,6 @@ var incidentAcknowledge = (options) => (options.client ?? client).patch({
   url: "/v1/incidents/{incident_id}/acknowledge",
   ...options
 });
-var incidentGet = (options) => (options.client ?? client).get({
-  security: [{
-    key: "projectApiKey",
-    scheme: "bearer",
-    type: "http"
-  }],
-  url: "/v1/incidents/{incident_id}",
-  ...options
-});
 var incidentList = (options) => (options?.client ?? client).get({
   security: [{
     key: "projectApiKey",
@@ -1184,6 +1176,28 @@ var incidentList = (options) => (options?.client ?? client).get({
     type: "http"
   }],
   url: "/v1/incidents",
+  ...options
+});
+var incidentCreate = (options) => (options.client ?? client).post({
+  security: [{
+    key: "projectApiKey",
+    scheme: "bearer",
+    type: "http"
+  }],
+  url: "/v1/incidents",
+  ...options,
+  headers: {
+    "Content-Type": "application/json",
+    ...options.headers
+  }
+});
+var incidentGet = (options) => (options.client ?? client).get({
+  security: [{
+    key: "projectApiKey",
+    scheme: "bearer",
+    type: "http"
+  }],
+  url: "/v1/incidents/{incident_id}",
   ...options
 });
 var incidentResolve = (options) => (options.client ?? client).patch({
@@ -2149,6 +2163,7 @@ var dashboardUpdate = (options) => (options.client ?? client).patch({
   heartbeatUnpause,
   heartbeatUpdate,
   incidentAcknowledge,
+  incidentCreate,
   incidentGet,
   incidentList,
   incidentResolve,
