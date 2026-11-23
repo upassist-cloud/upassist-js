@@ -1,7 +1,19 @@
 {
-  "name": "upassist",
+  "name": "@upassist-cloud/upassist-js",
   "version": "1.0.0",
-  "description": "Generated client for the Upassist public management API",
+  "description": "Official generated client for the Upassist public management API",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upassist-cloud/upassist-js.git"
+  },
+  "keywords": [
+    "upassist",
+    "analytics",
+    "monitoring",
+    "performance"
+  ],
+  "author": "Developers <support@upassist.cloud>",
+  "license": "Apache-2.0",
   "type": "module",
   "main": "./dist/src/index.cjs",
   "module": "./dist/src/index.mjs",
